@@ -5,13 +5,8 @@ import { useStore } from "../../../app/stores/store";
 
 const ActivityForm = observer(() => {
   const { activityStore } = useStore();
-  const {
-    selectedActivity,
-    closeForm,
-    createActivity,
-    updateActivity,
-    loading,
-  } = activityStore;
+  const { selectedActivity, createActivity, updateActivity, loading } =
+    activityStore;
 
   const initialState = selectedActivity ?? {
     id: "",
@@ -85,12 +80,7 @@ const ActivityForm = observer(() => {
           type="submit"
           content="Submit"
         />
-        <Button
-          onClick={closeForm}
-          floated="right"
-          type="button"
-          content="Cancel"
-        />
+        <Button floated="right" type="button" content="Cancel" />
       </Form>
     </Segment>
   );
