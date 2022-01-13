@@ -15,9 +15,7 @@ const ActivityDetails = observer(() => {
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
-    if (id) {
-      loadActivity(id);
-    }
+    if (id) loadActivity(id);
   }, [id, loadActivity]);
 
   if (loadingInitial || !activity) return <LoadingComponents />;
