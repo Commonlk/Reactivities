@@ -12,6 +12,14 @@ namespace Application.Activities
             public Activity Activity { get; set; }
         }
 
+        public class CommandValidator : FluentValidation.AbstractValidator<Command>
+        {
+            public CommandValidator()
+            {
+                RuleFor(x => x.Activity).SetValidator(new ActivityValidator());
+            }
+        }
+
         public class Handler : IRequestHandler<Command>
         {
             private readonly DataContext _context;
