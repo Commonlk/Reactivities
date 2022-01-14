@@ -2,6 +2,7 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { toast } from "react-toastify";
 import { history } from "../..";
 import { Activity } from "../models/activty";
+import { store } from "../stores/store";
 
 // const sleep = (delay: number) => {
 //   return new Promise((resolve) => setTimeout(resolve, delay));
@@ -31,14 +32,15 @@ axios.interceptors.response.use(
         }
         break;
       case 401:
-        toast.error("unauthorized");
+        toast.error("unauthorised");
         break;
       case 404:
         history.push("/not-found");
         toast.error("not found");
         break;
       case 500:
-        toast.error("server errror");
+        store.commonStore.setServerError(data);
+        history.push("/server-error");
         break;
     }
   }
