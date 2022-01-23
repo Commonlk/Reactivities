@@ -8,6 +8,9 @@ import { v4 as uuid } from "uuid";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import MyTextInput from "../../../app/common/form/MyTextInput";
+import MyTextArea from "../../../app/common/form/MyTextArea";
+import MySelectInput from "../../../app/common/form/MySelectInput";
+import { categoryOptions } from "../../../app/common/options/categoryOptions";
 
 const ActivityForm = observer(() => {
   const history = useHistory();
@@ -45,31 +48,6 @@ const ActivityForm = observer(() => {
     if (id) loadActivity(id).then((activity) => setActivity(activity!));
   }, [id, loadActivity]);
 
-  // const handleSubmit = (): void => {
-  //   if (activity.id.length === 0) {
-  //     let newActivity = {
-  //       ...activity,
-  //       id: uuid(),
-  //     };
-  //     createActivity(newActivity).then(() =>
-  //       history.push(`/activities/${newActivity.id}`)
-  //     );
-  //   } else {
-  //     updateActivity(activity).then(() =>
-  //       history.push(`/activities/${activity.id}`)
-  //     );
-  //   }
-  // };
-
-  // const handleInputChange = (
-  //   e:
-  //     | React.ChangeEvent<HTMLInputElement>
-  //     | React.ChangeEvent<HTMLTextAreaElement>
-  // ): void => {
-  //   const { name, value } = e.target;
-  //   setActivity({ ...activity, [name]: value });
-  // };
-
   if (loadingInitial) return <LoadingComponents content="loading" />;
 
   return (
@@ -83,8 +61,12 @@ const ActivityForm = observer(() => {
         {({ handleSubmit }) => (
           <Form className="ui form" onSubmit={handleSubmit} autoComplete="off">
             <MyTextInput name="title" placeholder="Title" />
-            <MyTextInput placeholder="Description" name="description" />
-            <MyTextInput placeholder="Category" name="category" />
+            <MyTextArea rows={3} placeholder="Description" name="description" />
+            <MySelectInput
+              options={categoryOptions}
+              placeholder="Category"
+              name="category"
+            />
             <MyTextInput placeholder="Date" name="date" />
             <MyTextInput placeholder="City" name="city" />
             <MyTextInput placeholder="Venue" name="venue" />
