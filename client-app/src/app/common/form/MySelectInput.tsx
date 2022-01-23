@@ -14,7 +14,7 @@ const MySelectInput = (props: Props) => {
 
   return (
     <Form.Field error={meta.touched && !!meta.error}>
-      <Label>{props.label}</Label>
+      {props.label && <Label>{props.label}</Label>}
       <Select
         clearable
         options={props.options}
