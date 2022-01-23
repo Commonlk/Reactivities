@@ -4,13 +4,14 @@ import { Link, useHistory, useParams } from "react-router-dom";
 import { Button, Segment } from "semantic-ui-react";
 import LoadingComponents from "../../../app/layout/LoadingComponents";
 import { useStore } from "../../../app/stores/store";
-import { v4 as uuid } from "uuid";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import MyTextInput from "../../../app/common/form/MyTextInput";
 import MyTextArea from "../../../app/common/form/MyTextArea";
 import MySelectInput from "../../../app/common/form/MySelectInput";
 import { categoryOptions } from "../../../app/common/options/categoryOptions";
+import MyDateInput from "../../../app/common/form/MyDateInput";
+import { Activity } from "../../../app/models/activty";
 
 const ActivityForm = observer(() => {
   const history = useHistory();
@@ -24,12 +25,12 @@ const ActivityForm = observer(() => {
   } = activityStore;
   const { id } = useParams<{ id: string }>();
 
-  const [activity, setActivity] = useState({
+  const [activity, setActivity] = useState<Activity>({
     id: "",
     title: "",
     category: "",
     description: "",
-    date: "",
+    date: null,
     city: "",
     venue: "",
   });
@@ -67,7 +68,13 @@ const ActivityForm = observer(() => {
               placeholder="Category"
               name="category"
             />
-            <MyTextInput placeholder="Date" name="date" />
+            <MyDateInput
+              placeholderText="Date"
+              name="date"
+              showTimeSelect
+              timeCaption="time"
+              dateFormat="MMMM d, yyyy h:mm aa"
+            />
             <MyTextInput placeholder="City" name="city" />
             <MyTextInput placeholder="Venue" name="venue" />
             <Button
