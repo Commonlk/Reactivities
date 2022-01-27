@@ -35,9 +35,7 @@ namespace API.Controllers
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
             if (result.Succeeded)
-            {
                 return CreateUserObject(user);
-            }
 
             return Unauthorized();
         }
@@ -62,7 +60,7 @@ namespace API.Controllers
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
             if (result.Succeeded)
-                CreateUserObject(user);
+                return CreateUserObject(user);
 
             return BadRequest("Problem registering user");
         }
