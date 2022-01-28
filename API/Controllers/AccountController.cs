@@ -51,7 +51,7 @@ namespace API.Controllers
                 return ValidationProblem();
             }
 
-            if (await _userManager.Users.AnyAsync(x => x.UserName == registerDto.UserName))
+            if (await _userManager.Users.AnyAsync(x => x.UserName == registerDto.Username))
             {
                 ModelState.AddModelError("username", "Username taken");
                 return ValidationProblem();
@@ -61,7 +61,7 @@ namespace API.Controllers
             {
                 DisplayName = registerDto.DisplayName,
                 Email = registerDto.Email,
-                UserName = registerDto.UserName
+                UserName = registerDto.Username
             };
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
@@ -88,7 +88,7 @@ namespace API.Controllers
                 DisplayName = user.DisplayName,
                 Image = null,
                 Token = _tokenService.CreateToken(user),
-                UserName = user.UserName
+                Username = user.UserName
             };
         }
     }
