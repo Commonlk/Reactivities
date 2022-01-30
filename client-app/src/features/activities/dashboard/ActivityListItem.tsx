@@ -3,6 +3,7 @@ import { format } from "date-fns";
 import { Link } from "react-router-dom";
 import { Button, Icon, Item, Segment } from "semantic-ui-react";
 import { Activity } from "../../../app/models/activty";
+import ActivityListItemAttendee from "./ActivityListItemAttendee";
 
 interface Props {
   activity: Activity;
@@ -14,7 +15,7 @@ const ActivityListItem = ({ activity }: Props) => {
       <Segment>
         <Item.Group>
           <Item>
-            <Item.Image size="tiny" circular src="/assets/Images/user.png" />
+            <Item.Image size="tiny" circular src="/assets/images/user.png" />
             <Item.Content>
               <Item.Header as={Link} to={`/activities/${activity.id}`}>
                 {activity.title}
@@ -30,7 +31,9 @@ const ActivityListItem = ({ activity }: Props) => {
           <Icon name="marker" /> {activity.venue}
         </span>
       </Segment>
-      <Segment secondary>Attendees go here</Segment>
+      <Segment secondary>
+        <ActivityListItemAttendee attendees={activity.attendees!} />
+      </Segment>
       <Segment clearing>
         <span>{activity.description}</span>
         <Button
