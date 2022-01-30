@@ -26,7 +26,7 @@ const ActivityDetailedSidebar = observer(() => {
             >
               Host
             </Label>
-            <Image size="tiny" src={"/assets/Images/user.png"} />
+            <Image size="tiny" src={"/assets/images/user.png"} />
             <Item.Content verticalAlign="middle">
               <Item.Header as="h3">
                 <Link to={`#`}>Bob</Link>
@@ -36,7 +36,7 @@ const ActivityDetailedSidebar = observer(() => {
           </Item>
 
           <Item style={{ position: "relative" }}>
-            <Image size="tiny" src={"/assets/Images/user.png"} />
+            <Image size="tiny" src={"/assets/images/user.png"} />
             <Item.Content verticalAlign="middle">
               <Item.Header as="h3">
                 <Link to={`#`}>Tom</Link>
@@ -46,7 +46,7 @@ const ActivityDetailedSidebar = observer(() => {
           </Item>
 
           <Item style={{ position: "relative" }}>
-            <Image size="tiny" src={"/assets/Images/user.png"} />
+            <Image size="tiny" src={"/assets/images/user.png"} />
             <Item.Content verticalAlign="middle">
               <Item.Header as="h3">
                 <Link to={`#`}>Sally</Link>

@@ -17,7 +17,7 @@ const ActivityDetailedChat = observer(() => {
       <Segment attached>
         <Comment.Group>
           <Comment>
-            <Comment.Avatar src="/assets/Images/user.png" />
+            <Comment.Avatar src="/assets/images/user.png" />
             <Comment.Content>
               <Comment.Author as="a">Matt</Comment.Author>
               <Comment.Metadata>
@@ -31,7 +31,7 @@ const ActivityDetailedChat = observer(() => {
           </Comment>
 
           <Comment>
-            <Comment.Avatar src="/assets/Images/user.png" />
+            <Comment.Avatar src="/assets/images/user.png" />
             <Comment.Content>
               <Comment.Author as="a">Joe Henderson</Comment.Author>
               <Comment.Metadata>
