@@ -1,7 +1,7 @@
 import React from "react";
 import { format } from "date-fns";
 import { Link } from "react-router-dom";
-import { Button, Icon, Item, Segment } from "semantic-ui-react";
+import { Button, Icon, Item, Label, Segment } from "semantic-ui-react";
 import { Activity } from "../../../app/models/activty";
 import ActivityListItemAttendee from "./ActivityListItemAttendee";
 
@@ -20,7 +20,23 @@ const ActivityListItem = ({ activity }: Props) => {
               <Item.Header as={Link} to={`/activities/${activity.id}`}>
                 {activity.title}
               </Item.Header>
-              <Item.Description>Hosted by Bob</Item.Description>
+              <Item.Description>
+                Hosted by {activity.host?.displayName}
+              </Item.Description>
+              {activity.isHost && (
+                <Item.Description>
+                  <Label basic color="orange">
+                    You're hosting this activity
+                  </Label>
+                </Item.Description>
+              )}
+              {activity.isGoing && !activity.isHost && (
+                <Item.Description>
+                  <Label basic color="green">
+                    You're going to this activity
+                  </Label>
+                </Item.Description>
+              )}
             </Item.Content>
           </Item>
         </Item.Group>
