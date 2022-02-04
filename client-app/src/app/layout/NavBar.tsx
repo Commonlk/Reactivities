@@ -7,6 +7,7 @@ import { useStore } from "../stores/store";
 const NavBar = observer(() => {
   const {
     userStore: { user, logout },
+    profileStore: { profile },
   } = useStore();
   return (
     <Menu inverted fixed="top">
@@ -31,7 +32,7 @@ const NavBar = observer(() => {
         </Menu.Item>
         <Menu.Item position="right">
           <Image
-            src={user?.image || "/assets/images/user.png"}
+            src={profile?.image || "/assets/images/user.png"}
             avatar
             spaced="right"
           />
