@@ -34,6 +34,8 @@ export default class ProfileStore {
     }
   };
 
+  updateProfile = async () => {};
+
   uploadPhoto = async (file: Blob) => {
     this.uploading = true;
     try {
