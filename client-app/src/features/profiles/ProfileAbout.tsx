@@ -1,61 +1,48 @@
-import React, { useEffect, useState } from "react";
-import { Form, Formik } from "formik";
-import { Button, Header, Tab } from "semantic-ui-react";
-import { Profile, ProfileFormValues } from "../../app/models/profile";
-import * as Yup from "yup";
-import MyTextInput from "../../app/common/form/MyTextInput";
-import MyTextArea from "../../app/common/form/MyTextArea";
+import React, { useState } from "react";
+import { Button, Grid, Header, Tab } from "semantic-ui-react";
+import { Profile } from "../../app/models/profile";
+import { useStore } from "../../app/stores/store";
+import ProfileAboutForm from "./ProfileAboutForm";
 
 interface Props {
   profile: Profile;
 }
 
 const ProfileAbout = ({ profile }: Props) => {
-  const [profileValues, setProfileValues] = useState<ProfileFormValues>(
-    new ProfileFormValues()
-  );
-
-  useEffect(() => {
-    if (profile) {
-      setProfileValues(new ProfileFormValues(profile));
-    }
-  }, [profile]);
-
-  const validationSchema = Yup.object({
-    displayName: Yup.string().required("Display name cannot be empty"),
-    bio: Yup.string().notRequired(),
-  });
-
-  const handleFormSubmit = (profile: ProfileFormValues) => {};
+  const {
+    profileStore: { isCurrentUser },
+  } = useStore();
+  const [editProfileMode, setEditProfileMode] = useState(false);
 
   return (
     <Tab.Pane>
-      <Header floated="left" content="About" />
-      <Formik
-        initialValues={profileValues}
-        validationSchema={validationSchema}
-        enableReinitialize
-        onSubmit={(values) => handleFormSubmit(values)}
-      >
-        {({ handleSubmit, isValid, isSubmitting, initialValues, values }) => (
-          <Form className="ui form" onSubmit={handleSubmit} autoComplete="off">
-            <MyTextInput name="displayName" placeholder="Name" />
-            <MyTextArea rows={3} name="bio" placeholder="Bio description..." />
+      <Grid>
+        <Grid.Column width={16}>
+          <Header
+            icon="user"
+            floated="left"
+            content={`About ${profile.displayName}`}
+          />
+          {isCurrentUser && (
             <Button
-              disabled={
-                isSubmitting ||
-                !isValid ||
-                initialValues.displayName === values.displayName
-              }
-              loading={isSubmitting}
               floated="right"
-              positive
-              type="submit"
-              content="Submit"
+              basic
+              content={editProfileMode ? "Cancel" : "Edit Profile"}
+              onClick={() => setEditProfileMode(!editProfileMode)}
             />
-          </Form>
-        )}
-      </Formik>
+          )}
+        </Grid.Column>
+        <Grid.Column width={16}>
+          {editProfileMode ? (
+            <ProfileAboutForm
+              profile={profile}
+              setEditProfileMode={setEditProfileMode}
+            />
+          ) : (
+            <span style={{ whiteSpace: "pre-wrap" }}>{profile.bio}</span>
+          )}
+        </Grid.Column>
+      </Grid>
     </Tab.Pane>
   );
 };
