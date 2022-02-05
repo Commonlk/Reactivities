@@ -66,6 +66,7 @@ export default class ProfileStore {
           this.profile.photos.find((p) => p.isMain)!.isMain = false;
           this.profile.photos.find((p) => p.id === photo.id)!.isMain = true;
           this.profile.image = photo.url;
+          store.userStore.setImage(photo.url);
           this.loading = false;
         }
       });
