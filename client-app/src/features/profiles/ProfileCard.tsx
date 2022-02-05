@@ -14,7 +14,9 @@ const ProfileCard = observer(({ profile }: Props) => {
       <Image src={profile.image || "assets/images/user.png"} />
       <Card.Content>
         <Card.Header>{profile.displayName}</Card.Header>
-        <Card.Description>Bio goes here</Card.Description>
+        <Card.Description>
+          {profile.bio && `${profile.bio?.substring(0, 36)}...`}
+        </Card.Description>
       </Card.Content>
       <Card.Content extra>
         <Icon name="user" />
