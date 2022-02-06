@@ -9,7 +9,7 @@ const NavBar = observer(() => {
     userStore: { user, logout },
   } = useStore();
   return (
-    <Menu inverted fixed="top">
+    <Menu inverted fixed="top" style={{ zIndex: 9999 }}>
       <Container>
         <Menu.Item as={NavLink} to="/" exact header>
           <img
