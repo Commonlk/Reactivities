@@ -58,7 +58,7 @@ const ActivityDetailedChat = observer(({ activityId }: Props) => {
                       placeholder="Enter your comment (Enter to submit, SHIFT + enter for new line"
                       rows={2}
                       {...props.field}
-                      onKeyPress={(e) => {
+                      onKeyPress={e => {
                         if (e.key === "Enter" && e.shiftKey) {
                           return;
                         }
@@ -75,11 +75,9 @@ const ActivityDetailedChat = observer(({ activityId }: Props) => {
           )}
         </Formik>
         <Comment.Group>
-          {comments.map((comment) => (
+          {comments.map(comment => (
             <Comment key={comment.id}>
-              <Comment.Avatar
-                src={comment.image || "/assets/images/user.png"}
-              />
+              <Comment.Avatar src={comment.image || "assets/images/user.png"} />
               <Comment.Content>
                 <Comment.Author as={Link} to={`/profiles/${comment.username}`}>
                   {comment.displayName}

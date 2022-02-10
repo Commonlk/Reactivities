@@ -15,7 +15,7 @@ const HomePage = observer(() => {
         <Header as="h1" inverted>
           <Image
             size="massive"
-            src="/assets/images/logo.png"
+            src="assets/images/logo.png"
             alt="logo"
             style={{ marginBottom: 12 }}
           />

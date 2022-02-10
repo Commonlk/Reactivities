@@ -26,7 +26,7 @@ const ActivityDetailedSidebar = observer(
         </Segment>
         <Segment attached>
           <List relaxed divided>
-            {attendees.map((attendee) => (
+            {attendees.map(attendee => (
               <Item style={{ position: "relative" }} key={attendee.username}>
                 {attendee.username === host?.username && (
                   <Label
@@ -39,7 +39,7 @@ const ActivityDetailedSidebar = observer(
                 )}
                 <Image
                   size="tiny"
-                  src={attendee.image || "/assets/images/user.png"}
+                  src={attendee.image || "assets/images/user.png"}
                 />
                 <Item.Content verticalAlign="middle">
                   <Item.Header as="h3">

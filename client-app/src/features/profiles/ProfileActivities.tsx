@@ -51,7 +51,7 @@ const ProfileActivities = observer(() => {
           {userActivities.map((activity: UserActivity) => (
             <Card as={Link} to={`/activities/${activity.id}`} key={activity.id}>
               <Image
-                src={`/assets/images/categoryImages/${activity.category}.jpg`}
+                src={`assets/images/categoryImages/${activity.category}.jpg`}
                 style={{ minHeight: 100, objectFit: "Cover" }}
               />
               <Card.Content>
