@@ -39,7 +39,7 @@ const ActivityDetailedSidebar = observer(
                 )}
                 <Image
                   size="tiny"
-                  src={attendee.image || "assets/images/user.png"}
+                  src={attendee.image || "/assets/images/user.png"}
                 />
                 <Item.Content verticalAlign="middle">
                   <Item.Header as="h3">

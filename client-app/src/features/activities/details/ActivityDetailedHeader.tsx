@@ -40,7 +40,7 @@ const ActivityDetailedHeader = observer(({ activity }: Props) => {
           />
         )}
         <Image
-          src={`assets/images/categoryimages/${activity.category}.jpg`}
+          src={`/assets/images/categoryimages/${activity.category}.jpg`}
           fluid
           style={activityImageStyle}
         />

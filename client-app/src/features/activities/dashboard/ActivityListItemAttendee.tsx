@@ -30,7 +30,7 @@ const ActivityListItemAttendee = observer(({ attendees }: Props) => {
               <Image
                 size="mini"
                 circular
-                src={attendee.image || "assets/images/user.png"}
+                src={attendee.image || "/assets/images/user.png"}
                 bordered
                 style={attendee.following ? styles : null}
               />

@@ -13,7 +13,7 @@ const NavBar = observer(() => {
       <Container>
         <Menu.Item as={NavLink} to="/" exact header>
           <img
-            src="assets/images/logo.png"
+            src="/assets/images/logo.png"
             alt="logo"
             style={{ marginRight: "10px" }}
           />
@@ -31,7 +31,7 @@ const NavBar = observer(() => {
         </Menu.Item>
         <Menu.Item position="right">
           <Image
-            src={user?.image || "assets/images/user.png"}
+            src={user?.image || "/assets/images/user.png"}
             avatar
             spaced="right"
           />
