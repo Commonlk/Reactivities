@@ -1,6 +1,6 @@
 import { makeAutoObservable, reaction, runInAction } from "mobx";
 import agent from "../api/agent";
-import { Photo, Profile } from "../models/profile";
+import { Photo, Profile, UserActivity } from "../models/profile";
 import { store } from "./store";
 
 export default class ProfileStore {
@@ -11,13 +11,15 @@ export default class ProfileStore {
   followings: Profile[] = [];
   loadingFollowings = false;
   activeTab = 0;
+  userActivities: UserActivity[] = [];
+  loadingActivities = false;
 
   constructor() {
     makeAutoObservable(this);
 
     reaction(
       () => this.activeTab,
-      (activeTab) => {
+      activeTab => {
         if (activeTab === 3 || activeTab === 4) {
           const predicate = activeTab === 3 ? "followers" : "following";
           this.loadFollowings(predicate);
@@ -97,8 +99,8 @@ export default class ProfileStore {
       await agent.Profiles.setMainPhoto(photo.id);
       runInAction(() => {
         if (this.profile && this.profile.photos) {
-          this.profile.photos.find((p) => p.isMain)!.isMain = false;
-          this.profile.photos.find((p) => p.id === photo.id)!.isMain = true;
+          this.profile.photos.find(p => p.isMain)!.isMain = false;
+          this.profile.photos.find(p => p.id === photo.id)!.isMain = true;
           this.profile.image = photo.url;
           store.userStore.setImage(photo.url);
           this.loading = false;
@@ -117,7 +119,7 @@ export default class ProfileStore {
       runInAction(() => {
         if (this.profile) {
           this.profile.photos = this.profile.photos?.filter(
-            (p) => p.id !== photo.id
+            p => p.id !== photo.id
           );
           this.loading = false;
         }
@@ -152,7 +154,7 @@ export default class ProfileStore {
             ? this.profile.followingCount++
             : this.profile.followingCount--;
         }
-        this.followings.forEach((profile) => {
+        this.followings.forEach(profile => {
           if (profile.username === username) {
             profile.following
               ? profile.followerCount--
@@ -182,6 +184,23 @@ export default class ProfileStore {
     } catch (error) {
       console.log(error);
       runInAction(() => (this.loadingFollowings = false));
+    }
+  };
+
+  loadUserActivities = async (username: string, predicate?: string) => {
+    this.loadingActivities = true;
+    try {
+      const activities = await agent.Profiles.listActivities(
+        username,
+        predicate!
+      );
+      runInAction(() => {
+        this.userActivities = activities;
+        this.loadingActivities = false;
+      });
+    } catch (error) {
+      console.log(error);
+      runInAction(() => (this.loadingActivities = false));
     }
   };
 }

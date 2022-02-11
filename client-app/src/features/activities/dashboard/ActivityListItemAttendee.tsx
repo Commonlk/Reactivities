@@ -17,7 +17,7 @@ const ActivityListItemAttendee = observer(({ attendees }: Props) => {
 
   return (
     <List horizontal>
-      {attendees.map((attendee) => (
+      {attendees.map(attendee => (
         <Popup
           hoverable
           key={attendee.username}
@@ -30,7 +30,7 @@ const ActivityListItemAttendee = observer(({ attendees }: Props) => {
               <Image
                 size="mini"
                 circular
-                src={attendee.image || "/assets/images/user.png"}
+                src={attendee.image || "assets/images/user.png"}
                 bordered
                 style={attendee.following ? styles : null}
               />

@@ -5,6 +5,7 @@ import { Profile } from "../../app/models/profile";
 import { useStore } from "../../app/stores/store";
 import ProfileAbout from "./ProfileAbout";
 import ProfileFollowings from "./ProfileFollowings";
+import ProfileActivities from "./ProfileActivities";
 import ProfilePhotos from "./ProfilePhotos";
 
 interface Props {
@@ -20,7 +21,7 @@ const ProfileContent = observer(({ profile }: Props) => {
       render: () => <ProfileAbout profile={profile} />,
     },
     { menuItem: "Photos", render: () => <ProfilePhotos profile={profile} /> },
-    { menuItem: "Events", render: () => <Tab.Pane>Events Content</Tab.Pane> },
+    { menuItem: "Events", render: () => <ProfileActivities /> },
     {
       menuItem: "Followers",
       render: () => <ProfileFollowings />,
